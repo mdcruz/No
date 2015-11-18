@@ -50,6 +50,12 @@ namespace Northwind.White
 
             DBQueries.DeleteProjectRecord(mainWindow.GetProjectName());
         }
+
+        [TestMethod]
+        public void ShouldLinkEmployeeToAProject() 
+        {
+        
+        }
         
         [TestCleanup]
         public void Cleanup() 
