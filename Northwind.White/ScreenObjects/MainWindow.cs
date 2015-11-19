@@ -11,12 +11,20 @@ namespace Northwind.White.ScreenObjects
         private Window _window;
 
         #region Screen properties
+
+        private ListItem DashboardTab
+        {
+            get
+            {
+                return _window.Get<ListBox>().Item("Dashboard");
+            }
+        }
+
         private ListItem EmployeesTab 
         {
             get 
             {
-                var mainMenu = _window.Get<ListBox>();
-                return mainMenu.Item("Employees");
+                return _window.Get<ListBox>().Item("Employees");
             }
         }
 
@@ -24,8 +32,7 @@ namespace Northwind.White.ScreenObjects
         {
             get 
             {
-                var mainMenu = _window.Get<ListBox>();
-                return mainMenu.Item("Departments");
+                return _window.Get<ListBox>().Item("Departments");
             }
         }
 
@@ -33,8 +40,7 @@ namespace Northwind.White.ScreenObjects
         {
             get 
             {
-                var mainMenu = _window.Get<ListBox>();
-                return mainMenu.Item("Projects");
+                return _window.Get<ListBox>().Item("Projects");
             }
         }
 
@@ -77,6 +83,11 @@ namespace Northwind.White.ScreenObjects
         {
             ProjectsTab.Select();
             Add.Click();
+        }
+
+        public void ClickEmployeeRecord() 
+        {
+            DataList.Rows[0].Click();
         }
 
         public bool IsEmployeeAdded(string firstName, string lastName)

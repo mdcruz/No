@@ -31,25 +31,40 @@ namespace Northwind.Database
                             WHERE Name = '" + name + "'");
         }
 
+        public static bool IsEmployeeAddedToProject(string name) 
+        {
+            var data = GetDataSet(@"SELECT * FROM dbo.ProjectInvolement
+                                    WHERE EmployeeID = (SELECT EmployeeID
+                                    FROM dbo.Employee WHERE FirstName = '" + name + "')");
+
+            if (data.Tables[0].Rows == null || data.Tables[0].Rows.Count == 0)
+                return false;
+            else
+                return true;
+        }
+
         private static DataSet GetDataSet(string sqlCommand)
         {
             DataSet ds = new DataSet();
 
-            using (SqlCommand cmd = new SqlCommand(sqlCommand, new SqlConnection(connectionString)))
+            using (SqlConnection conn = new SqlConnection(connectionString)) 
             {
                 try 
                 {
-                    cmd.Connection.Open();
-                    DataTable table = new DataTable();
-                    table.Load(cmd.ExecuteReader());
-                    ds.Tables.Add(table);
+                    conn.Open();
+
+                    using (SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCommand, conn)) 
+                    {
+                        dataAdapter.Fill(ds);
+                    }
                 }
-                catch (Exception e) 
+
+                catch (Exception e)
                 {
                     Console.WriteLine(e.ToString());
                 }
 
-                cmd.Connection.Close();
+                conn.Close();
             }
 
             return ds;

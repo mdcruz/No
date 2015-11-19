@@ -27,8 +27,6 @@ namespace Northwind.White
             var departmentDetails = new DepartmentDetails();
             DepartmentWorkflow.AddNewDepartment(mainWindow, departmentDetails, application);
             Assert.IsTrue(mainWindow.IsDepartmentAdded(departmentDetails.DepartmentName), "Department has been added");
-
-            DBQueries.DeleteDepartmentRecord(mainWindow.GetDepartmentName());
         }
 
         [TestMethod]
@@ -37,8 +35,7 @@ namespace Northwind.White
             var employeeDetails = new EmployeeDetails();
             EmployeeWorkflow.AddNewEmployee(mainWindow, employeeDetails, application);
             Assert.IsTrue(mainWindow.IsEmployeeAdded(employeeDetails.FirstName, employeeDetails.LastName), "Employee has been added");
-
-            DBQueries.DeleteEmployeeRecord(mainWindow.GetEmployeeFirstName());
+            Assert.IsFalse(DBQueries.IsEmployeeAddedToProject(employeeDetails.FirstName), "Employee has not been linked to a project"); 
         }
 
         [TestMethod]
@@ -47,20 +44,26 @@ namespace Northwind.White
             var projectDetails = new ProjectDetails();
             ProjectWorkflow.AddNewProject(mainWindow, projectDetails, application);
             Assert.IsTrue(mainWindow.IsProjectAdded(projectDetails.ProjectName), "Project has been added");
-
-            DBQueries.DeleteProjectRecord(mainWindow.GetProjectName());
         }
 
         [TestMethod]
         public void ShouldLinkEmployeeToAProject() 
         {
-        
+            var projectDetails = new ProjectDetails();
+            ProjectWorkflow.AddNewProject(mainWindow, projectDetails, application);
+
+            var employeeDetails = new EmployeeDetails();
+            EmployeeWorkflow.AddNewEmployeeAndLinkToProject(mainWindow, employeeDetails, application);
+            Assert.IsTrue(DBQueries.IsEmployeeAddedToProject(employeeDetails.FirstName), "Employee has been linked to a project");      
         }
         
         [TestCleanup]
         public void Cleanup() 
         {    
             application.Kill();
+            DBQueries.DeleteEmployeeRecord(new EmployeeDetails().FirstName);
+            DBQueries.DeleteDepartmentRecord(new DepartmentDetails().DepartmentName);
+            DBQueries.DeleteProjectRecord(new ProjectDetails().ProjectName);
         }
 
     }
