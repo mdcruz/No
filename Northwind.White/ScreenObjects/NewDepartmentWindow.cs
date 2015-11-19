@@ -11,7 +11,6 @@ namespace Northwind.White
     public class NewDepartmentWindow
     {
         private Window _window;
-        private Application _application;
 
         #region Screen properties
 
@@ -33,11 +32,9 @@ namespace Northwind.White
 
         #endregion
 
-        public NewDepartmentWindow(Application application) 
+        public NewDepartmentWindow(Window window) 
         {
-            _application = application;
-            _window = Retry.For(
-                () => _application.GetWindows().First(x => x.Title.Contains("New department")), TimeSpan.FromSeconds(5));
+            _window = window;
         }
 
         public void AddNewDepartment(string departmentName)

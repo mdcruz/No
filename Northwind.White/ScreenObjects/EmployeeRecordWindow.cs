@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Northwind.White.Helpers;
+using System;
 using System.Linq;
 using TestStack.White;
 using TestStack.White.UIItems;
@@ -9,9 +10,8 @@ using TestStack.White.Utility;
 
 namespace Northwind.White.ScreenObjects
 {
-    public class EmployeeRecordWindow
+    public class EmployeeRecordWindow 
     {
-        private Application _application;
         private Window _window;
 
         #region Screen properties
@@ -48,64 +48,21 @@ namespace Northwind.White.ScreenObjects
             }
         }
 
-        private ListItem TestProject
-        {
-            get
-            {
-                return EmployeeProjectWindow.Get<ListBox>().Item("Test Project");
-            }
-        }
-
-        private ComboBox TestRole 
-        {
-            get 
-            {
-                return EmployeeProjectWindow.Get<ComboBox>();
-            }
-        }
-
-        private CheckBox MainProject 
-        {
-            get 
-            {
-                return EmployeeProjectWindow.Get<CheckBox>();
-            }
-        }
-
-        private Button OKBtnEmployeeProjectWindow
-        {
-            get
-            {
-                return EmployeeProjectWindow.Get<Button>(SearchCriteria.ByText("OK"));
-            }
-        }
-
-        private Window EmployeeProjectWindow 
-        {
-            get 
-            {
-                return Retry.For(
-                    () => _application.GetWindows().First(x => x.Title.Contains("New project for employee:")), TimeSpan.FromSeconds(5));
-            }
-        }
-
         #endregion
 
-        public EmployeeRecordWindow(Application application) 
+        public EmployeeRecordWindow(Window window) 
         {
-            _application = application;
-            _window = Retry.For(
-                () => _application.GetWindows().First(x => x.Title.Contains("Employee:")), TimeSpan.FromSeconds(5));
+            _window = window;
         }
 
         public void AssignEmployeeToProject() 
         {
             ProjectsTab.Select();
             AddBtn.Click();
-            TestProject.Select();
-            TestRole.Select("Tester");
-            MainProject.Click();
-            OKBtnEmployeeProjectWindow.Click();
+        }
+
+        public void ClickOk() 
+        {
             OKBtn.Click();
         }
     }

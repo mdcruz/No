@@ -41,11 +41,9 @@ namespace Northwind.White.ScreenObjects
 
         #endregion
 
-        public NewProjectWindow(Application application) 
+        public NewProjectWindow(Window window) 
         {
-            _application = application;
-            _window = Retry.For(
-                () => _application.GetWindows().First(x => x.Title.Contains("New project")), TimeSpan.FromSeconds(5));
+            _window = window;
         }
 
         public void AddNewProject(ProjectDetails details) 

@@ -13,8 +13,6 @@ namespace Northwind.White.ScreenObjects
     public class NewEmployeeWindow
     {
         private Window _window;
-        private Window _changeDepartmentWindow;
-        private Application _application;
 
         #region Screen properties
 
@@ -50,23 +48,7 @@ namespace Northwind.White.ScreenObjects
             }
         }
 
-        private ListItem TestDepartment 
-        {
-            get 
-            {
-                return _changeDepartmentWindow.Get<ListBox>().Item("Test Department");
-            }
-        }
-
-        private Button OK_ChangeDepartment 
-        {
-            get 
-            {
-                return _changeDepartmentWindow.Get<Button>(SearchCriteria.ByText("OK"));
-            }
-        }
-
-        private Button OK_EmployeeWindow 
+        private Button OKBtn
         {
             get 
             {
@@ -76,11 +58,9 @@ namespace Northwind.White.ScreenObjects
 
         #endregion
 
-        public NewEmployeeWindow(Application application) 
+        public NewEmployeeWindow(Window window) 
         {
-            _application = application;
-            _window = Retry.For(
-               () => _application.GetWindows().First(x => x.Title.Contains("New employee")), TimeSpan.FromSeconds(5));
+            _window = window;
         }
 
         public NewEmployeeWindow AddNewEmployee(EmployeeDetails details)
@@ -93,15 +73,9 @@ namespace Northwind.White.ScreenObjects
             return this;
         }
 
-        public NewEmployeeWindow AssignToDepartment(string departmentName)
+        public NewEmployeeWindow ClickOk()
         {
-            _changeDepartmentWindow = Retry.For(
-                () => _application.GetWindows().First(x => x.Title.Contains("Change department")), TimeSpan.FromSeconds(5));
-
-            TestDepartment.Click();
-            OK_ChangeDepartment.Click();
-            OK_EmployeeWindow.Click();
-
+            OKBtn.Click();
             return this;
         }
     }

@@ -37,7 +37,7 @@ namespace Northwind.Database
                                     WHERE EmployeeID = (SELECT EmployeeID
                                     FROM dbo.Employee WHERE FirstName = '" + name + "')");
 
-            if (data.Tables[0].Rows == null || data.Tables[0].Rows.Count == 0)
+            if (data.Tables[0].Rows.Count == 0)
                 return false;
             else
                 return true;

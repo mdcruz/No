@@ -50,6 +50,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\WindowObject.cs" />
+    <Compile Include="Helpers\Windows.cs" />
+    <Compile Include="ScreenObjects\AssignToDepartmentWindow.cs" />
+    <Compile Include="ScreenObjects\AssignToProjectWindow.cs" />
     <Compile Include="ScreenObjects\EmployeeRecordWindow.cs" />
     <Compile Include="ScreenObjects\NewDepartmentWindow.cs" />
     <Compile Include="ScreenObjects\NewEmployeeWindow.cs" />

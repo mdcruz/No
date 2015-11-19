@@ -62,9 +62,9 @@ namespace Northwind.White.ScreenObjects
 
         #endregion
 
-        public MainWindow(Application application) 
+        public MainWindow(Window window) 
         {
-            _window = application.GetWindow("Northwind");
+            _window = window;
         }
 
         public void AddEmployee()
@@ -73,7 +73,7 @@ namespace Northwind.White.ScreenObjects
             Add.Click();
         }
 
-        public void AddDepartment() 
+        public void ClickAddDepartment() 
         {
             DepartmentsTab.Select();
             Add.Click();
