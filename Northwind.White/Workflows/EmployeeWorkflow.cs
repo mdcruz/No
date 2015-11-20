@@ -13,6 +13,7 @@ namespace Northwind.White.Workflows
             window.NewEmployeeWindow.AddNewEmployee(employeeDetails);
             window.AssignDepartmentEmployeeWindow.AssignToDepartment(new DepartmentDetails().TestDepartmentName);
             window.NewEmployeeWindow.ClickOk();
+            //Test
         }
 
         public static void AddNewEmployeeAndLinkToProject(Windows window, EmployeeDetails employeeDetails) 
