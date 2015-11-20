@@ -1,19 +1,20 @@
-﻿using TestStack.White.UIItems;
+﻿using Northwind.White.Helpers;
+using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.ListBoxItems;
 using TestStack.White.UIItems.WindowItems;
 
 namespace Northwind.White.ScreenObjects
 {
-    public class AssignToProjectWindow
+    public class AssignToProjectWindow : WindowObject
     {
-        private Window _window;
+        #region Screen objects
 
         private Button OKBtnEmployeeProjectWindow
         {
             get
             {
-                return _window.Get<Button>(SearchCriteria.ByText("OK"));
+                return Button("OK");
             }
         }
 
@@ -21,7 +22,7 @@ namespace Northwind.White.ScreenObjects
         {
             get
             {
-                return _window.Get<ListBox>().Item("Test Project");
+                return ListItem("Test Project");
             }
         }
 
@@ -29,7 +30,7 @@ namespace Northwind.White.ScreenObjects
         {
             get
             {
-                return _window.Get<ComboBox>();
+                return ComboBox();
             }
         }
 
@@ -37,13 +38,15 @@ namespace Northwind.White.ScreenObjects
         {
             get
             {
-                return _window.Get<CheckBox>();
+                return CheckBox();
             }
         }
 
-        public AssignToProjectWindow(Window window) 
+        #endregion
+
+        public AssignToProjectWindow(Window window) : base(window)
         {
-            _window = window;   
+
         }
 
         public void FillInProjectDetails() 

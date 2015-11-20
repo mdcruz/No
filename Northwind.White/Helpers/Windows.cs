@@ -14,7 +14,7 @@ namespace Northwind.White.Helpers
     {
         private Application _application;
 
-        #region Window properties
+        #region Windows
 
         public MainWindow MainWindow 
         {

@@ -1,4 +1,5 @@
-﻿using Northwind.White.TestData;
+﻿using Northwind.White.Helpers;
+using Northwind.White.TestData;
 using System;
 using System.Linq;
 using TestStack.White;
@@ -9,17 +10,15 @@ using TestStack.White.Utility;
 
 namespace Northwind.White.ScreenObjects
 {
-    public class NewProjectWindow
+    public class NewProjectWindow : WindowObject
     {
-        private Window _window;
-        private Application _application;
-
         #region Screen properties
+
         private TextBox ProjectName 
         {
             get 
             {
-                return _window.Get<TextBox>(SearchCriteria.Indexed(0));
+                return TextBox(0);
             }
         }
 
@@ -27,7 +26,7 @@ namespace Northwind.White.ScreenObjects
         {
             get 
             {
-                return _window.Get<TextBox>(SearchCriteria.Indexed(1));
+                return TextBox(1);
             }
         }
 
@@ -35,15 +34,15 @@ namespace Northwind.White.ScreenObjects
         {
             get 
             {
-                return _window.Get<Button>(SearchCriteria.ByText("OK"));
+                return Button("OK");
             }
         }
 
         #endregion
 
-        public NewProjectWindow(Window window) 
+        public NewProjectWindow(Window window) : base(window)
         {
-            _window = window;
+      
         }
 
         public void AddNewProject(ProjectDetails details) 

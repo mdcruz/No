@@ -10,17 +10,15 @@ using TestStack.White.Utility;
 
 namespace Northwind.White.ScreenObjects
 {
-    public class EmployeeRecordWindow 
+    public class EmployeeRecordWindow : WindowObject
     {
-        private Window _window;
-
         #region Screen properties
 
         private Button OKBtn 
         {
             get 
             {
-                return _window.Get<Button>(SearchCriteria.ByText("OK"));
+                return Button("OK");
             }
         }
 
@@ -28,7 +26,7 @@ namespace Northwind.White.ScreenObjects
         {
             get
             {
-                return _window.Get<Button>(SearchCriteria.ByText("Add"));
+                return Button("Add");
             }
         }
 
@@ -36,7 +34,7 @@ namespace Northwind.White.ScreenObjects
         {
             get 
             {
-                return _window.Get<Button>(SearchCriteria.ByText("Cancel"));
+                return Button("Cancel");
             }
         }
 
@@ -44,15 +42,15 @@ namespace Northwind.White.ScreenObjects
         {
             get 
             {
-                return _window.Get<ListBox>().Item("Projects");
+                return ListItem("Projects");
             }
         }
 
         #endregion
 
-        public EmployeeRecordWindow(Window window) 
+        public EmployeeRecordWindow(Window window) : base(window)
         {
-            _window = window;
+
         }
 
         public void AssignEmployeeToProject() 

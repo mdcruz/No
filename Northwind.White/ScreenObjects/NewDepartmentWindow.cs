@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Northwind.White.Helpers;
+using System;
 using System.Linq;
 using TestStack.White;
 using TestStack.White.UIItems;
@@ -8,17 +9,15 @@ using TestStack.White.Utility;
 
 namespace Northwind.White
 {
-    public class NewDepartmentWindow
+    public class NewDepartmentWindow : WindowObject
     {
-        private Window _window;
-
         #region Screen properties
 
         private TextBox NameField 
         {
             get 
             {
-                return _window.Get<TextBox>(SearchCriteria.Indexed(0));
+                return TextBox(0);
             }
         }
 
@@ -26,15 +25,15 @@ namespace Northwind.White
         {
             get 
             {
-                return _window.Get<Button>(SearchCriteria.ByText("OK"));
+                return Button("OK");
             }
         }
 
         #endregion
 
-        public NewDepartmentWindow(Window window) 
+        public NewDepartmentWindow(Window window) : base(window)
         {
-            _window = window;
+       
         }
 
         public void AddNewDepartment(string departmentName)

@@ -1,4 +1,5 @@
-﻿using Northwind.White.TestData;
+﻿using Northwind.White.Helpers;
+using Northwind.White.TestData;
 using System;
 using System.Linq;
 using TestStack.White;
@@ -10,17 +11,15 @@ using TestStack.White.Utility;
 
 namespace Northwind.White.ScreenObjects
 {
-    public class NewEmployeeWindow
+    public class NewEmployeeWindow : WindowObject
     {
-        private Window _window;
-
         #region Screen properties
 
         private Button Change 
         {
             get 
             {
-                return _window.Get<Button>(SearchCriteria.ByText("Change"));
+                return Button("Change");
             }
         }
 
@@ -28,7 +27,7 @@ namespace Northwind.White.ScreenObjects
         {
             get 
             {
-                return _window.Get<TextBox>(SearchCriteria.Indexed(0));
+                return TextBox(0);
             }
         }
 
@@ -36,7 +35,7 @@ namespace Northwind.White.ScreenObjects
         {
             get
             {
-                return _window.Get<TextBox>(SearchCriteria.Indexed(1));
+                return TextBox(1);
             }
         }
 
@@ -44,7 +43,7 @@ namespace Northwind.White.ScreenObjects
         {
             get
             {
-                return _window.Get<TextBox>(SearchCriteria.Indexed(2));
+                return TextBox(2);
             }
         }
 
@@ -52,15 +51,15 @@ namespace Northwind.White.ScreenObjects
         {
             get 
             {
-                return _window.Get<Button>(SearchCriteria.ByText("OK"));
+                return Button("OK");
             }
         }
 
         #endregion
 
-        public NewEmployeeWindow(Window window) 
+        public NewEmployeeWindow(Window window) : base(window)
         {
-            _window = window;
+     
         }
 
         public NewEmployeeWindow AddNewEmployee(EmployeeDetails details)

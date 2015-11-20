@@ -1,19 +1,20 @@
-﻿using TestStack.White.UIItems;
+﻿using Northwind.White.Helpers;
+using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.ListBoxItems;
 using TestStack.White.UIItems.WindowItems;
 
 namespace Northwind.White.ScreenObjects
 {
-    public class AssignToDepartmentWindow
+    public class AssignToDepartmentWindow : WindowObject
     {
-        private Window _window;
- 
+        #region Screen properties
+
         private ListItem TestDepartment
         {
             get
             {
-                return _window.Get<ListBox>().Item("Test Department");
+                return ListItem("Test Department");
             }
         }
 
@@ -21,13 +22,15 @@ namespace Northwind.White.ScreenObjects
         {
             get
             {
-                return _window.Get<Button>(SearchCriteria.ByText("OK"));
+                return Button("OK");
             }
         }
 
-        public AssignToDepartmentWindow(Window window) 
+        #endregion
+
+        public AssignToDepartmentWindow(Window window) : base(window)
         {
-            _window = window;
+
         }
 
         public AssignToDepartmentWindow AssignToDepartment(string departmentName)

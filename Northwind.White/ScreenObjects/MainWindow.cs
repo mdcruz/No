@@ -1,4 +1,5 @@
-﻿using TestStack.White;
+﻿using Northwind.White.Helpers;
+using TestStack.White;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.ListBoxItems;
@@ -6,17 +7,15 @@ using TestStack.White.UIItems.WindowItems;
 
 namespace Northwind.White.ScreenObjects
 {
-    public class MainWindow
+    public class MainWindow : WindowObject
     {
-        private Window _window;
-
         #region Screen properties
 
         private ListItem DashboardTab
         {
             get
             {
-                return _window.Get<ListBox>().Item("Dashboard");
+                return ListItem("Dashboard");
             }
         }
 
@@ -24,7 +23,7 @@ namespace Northwind.White.ScreenObjects
         {
             get 
             {
-                return _window.Get<ListBox>().Item("Employees");
+                return ListItem("Employees");
             }
         }
 
@@ -32,7 +31,7 @@ namespace Northwind.White.ScreenObjects
         {
             get 
             {
-                return _window.Get<ListBox>().Item("Departments");
+                return ListItem("Departments");
             }
         }
 
@@ -40,7 +39,7 @@ namespace Northwind.White.ScreenObjects
         {
             get 
             {
-                return _window.Get<ListBox>().Item("Projects");
+                return ListItem("Projects");
             }
         }
 
@@ -48,7 +47,7 @@ namespace Northwind.White.ScreenObjects
         {
             get 
             {
-                return _window.Get<Button>(SearchCriteria.ByText("Add"));
+                return Button("Add");
             }
         }
 
@@ -56,15 +55,15 @@ namespace Northwind.White.ScreenObjects
         {
             get 
             {
-                return _window.Get<ListView>();
+                return ListView();
             }
         }
 
         #endregion
 
-        public MainWindow(Window window) 
+        public MainWindow(Window window) : base(window)
         {
-            _window = window;
+    
         }
 
         public void AddEmployee()
